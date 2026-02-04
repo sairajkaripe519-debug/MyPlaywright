@@ -1,21 +1,30 @@
-function playMovie() {
-console.log("Now playwing the Movie");
+
+// let funexp = function() {
+//     console.log(`this is function`);
+    
+// }
+// funexp()
+
+// let funarrow = () => {
+//     console.log(`this is arrow function`);
+    
+// }
+// funarrow()
+
+// const funarr2 = (a,b) => a + b;
+// console.log(funarr2(1,1));
+
+
+function add(a,b) {
+    const i = a+b
+    console.log("sum of numbers : ", i);
+    minus(i)
 }
+function minus(c) {
 
-
- console.log (checkAvailabilty ("SpiderMan" , playMovie) )
-
-
-function add (a,b,subtract){
-    const sum = a + b
-    console.log(sum);
-    subtract ()
+    console.log("after substraction: ", c - 2);
     
 }
 
-function subtract(c) {
-    console.log("After subtract : ", c-5);
-    
-}
 
-add (10,20,subtract)
+add(2,3,minus)

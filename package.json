@@ -1,0 +1,26 @@
+{
+  "name": "myplaywright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sairajkaripe519-debug/MyPlaywright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sairajkaripe519-debug/MyPlaywright/issues"
+  },
+  "homepage": "https://github.com/sairajkaripe519-debug/MyPlaywright#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9"
+  },
+  "dependencies": {
+    "typescript": "^5.9.3"
+  }
+}
