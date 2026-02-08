@@ -92,9 +92,9 @@ test.only(`Test canara bank alerts`, async({page}) => {
     
     await page.locator(`(//a[@id="netbanking-link"])`).click();
 
-    await page.screenshot({path: `/Users/sairajkarpe/Sairaj Education/MyPlaywright/tests/day09/canarabank.png`});
+    await page.screenshot({path: `./downloads/screenshots/canarabank.png`});
 
-      await page.waitForTimeout(3000);
+    await page.waitForTimeout(3000);
 
 })
 
