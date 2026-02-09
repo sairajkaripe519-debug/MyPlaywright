@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/sairajkaripe519-debug/MyPlaywright#readme",
   "devDependencies": {
-    "@playwright/test": "^1.57.0",
+    "@playwright/test": "^1.58.2",
     "@types/node": "^25.0.9"
   },
   "dependencies": {

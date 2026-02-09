@@ -4,17 +4,5 @@
 },
 {
     "TestcaseID": "TC002","username": "demosalesmanager","password": "crmsfa" 
-},
-{
-    "TestcaseID": "TC003","username": "dilipkumar.rajendran@testleaf.com","password": "TestLeaf@2025"
-},
-{
-    "TestcaseID": "TC004","username": "ravindran.ramdas@testleaf.com","password": "RaviTestleaf#1234"
-},
-{
-    "UserID": "001","Username": "dilipkumar.rajendran@testleaf.com","Password": "TestLeaf@2025"
-},
-{
-    "UserID": "002","Username": "ravindran.ramdas@testleaf.com","Password": "RaviTestleaf#1234"
 }
 ]
