@@ -114,90 +114,48 @@
 // });
 
 
-import {test, expect } from "@playwright/test" ;
+import {test,expect } from "@playwright/test" ;
 
-import logincreds from "./LoginSF.json";
+import {parse} from "csv-parse/sync" ;
 
-test.describe.serial(`Salesforce Login and Disable OTP`, async () => {
+import fs from "fs" ;
 
-    for (let data of logincreds) {
+import path from "path" ;
 
-        test(`Login to Salesforce and Disable OTP - ${data.TestcaseID}`, async ({page}) => {
+const LogDetails : any[] = parse(fs.readFileSync(path.join(__dirname,`LoginSF.csv`)), {
+    columns : true,
+    skip_empty_lines : true
+})
 
-            // Step 1: Navigate to Salesforce login page
-            await page.goto(`https://login.salesforce.com/?locale=in`);
-            await page.waitForLoadState('networkidle');
+test.describe.serial(`Login With CSV`, async () => {
 
-            // Step 2: Fill login credentials
-            await page.locator(`#username`).fill(data.UserID);
-            await page.locator(`#password`).fill(data.Password);
+    for (let data of LogDetails) {
 
-            // Step 3: Check remember username if available
-            const rememberCheckbox = await page.locator(`#rememberUn`);
-            if (await rememberCheckbox.isVisible()) {
-                await rememberCheckbox.click();
-            }
 
-            // Step 4: Click login button
-            await page.locator(`#Login`).click();
-            await page.waitForNavigation({ waitUntil: 'networkidle' });
+test(`TO Test using CSV file ${data.TestcaseID}`,async ({page}) => {
 
-            // Step 5: Handle OTP/2FA if prompted
-            // Check if OTP prompt appears
-            const otpPrompt = await page.locator('text=/Verify|Code|OTP|Passcode/i').isVisible().catch(() => false);
-            
-            if (otpPrompt) {
-                console.log('OTP prompt detected, attempting to dismiss...');
-                // Try to skip or dismiss OTP if possible
-                const skipButton = await page.locator('button:has-text("Skip"), button:has-text("Not now")').first().isVisible().catch(() => false);
-                if (skipButton) {
-                    await page.locator('button:has-text("Skip"), button:has-text("Not now")').first().click();
-                    await page.waitForNavigation({ waitUntil: 'networkidle' });
-                }
-            }
+    await page.goto(`https://login.salesforce.com/?locale=in`) ;
 
-            // Step 6: Navigate to Security Settings
-            // Click on user profile menu
-            const profileMenu = await page.locator('[aria-label*="profile"], [aria-label*="user"]').first().isVisible().catch(() => false);
-            if (profileMenu) {
-                await page.locator('[aria-label*="profile"], [aria-label*="user"]').first().click();
-                await page.waitForTimeout(1000);
-            } else {
-                // Alternative: Use Settings menu
-                await page.click('a[href*="settings"], button:has-text("Settings")');
-            }
+    await page.locator(`#username`).fill(data.Username);
 
-            // Step 7: Navigate to My Account or Security Settings
-            await page.click('a:has-text("My Account"), a:has-text("Account Settings"), a:has-text("Security")');
-            await page.waitForNavigation({ waitUntil: 'networkidle' });
+    await page.locator(`#password`).fill(data.Password);
 
-            // Step 8: Find and disable OTP/MFA
-            // Look for OTP or Two-Factor Authentication settings
-            const otpSection = await page.locator('text=/OTP|Multi-Factor|Two-Factor|MFA|Authenticator/i').first().isVisible().catch(() => false);
-            
-            if (otpSection) {
-                const otpHeading = await page.locator('text=/OTP|Multi-Factor|Two-Factor|MFA|Authenticator/i').first();
-                await otpHeading.scroll({ align: 'center' });
+    await page.waitForTimeout(2000);
 
-                // Look for disable button or toggle
-                const disableButton = await page.locator('button:has-text("Disable"), button:has-text("Remove"), button:has-text("Delete")').first().isVisible().catch(() => false);
-                
-                if (disableButton) {
-                    await page.locator('button:has-text("Disable"), button:has-text("Remove"), button:has-text("Delete")').first().click();
-                    await page.waitForTimeout(1000);
+   const RemeberMeBox = await page.locator(`#rememberUn:visible()`).isVisible()
 
-                    // Confirm disabling if confirmation dialog appears
-                    const confirmButton = await page.locator('button:has-text("Confirm"), button:has-text("Yes"), button:has-text("OK")').first().isVisible().catch(() => false);
-                    if (confirmButton) {
-                        await page.locator('button:has-text("Confirm"), button:has-text("Yes"), button:has-text("OK")').first().click();
-                        await page.waitForTimeout(1500);
-                    }
-                }
-            }
+   if (RemeberMeBox) { await page.locator(`#rememberUn`).isvisible() 
+    then 
+   }
+    
+    await page.locator(`#rememberUn`).click();
 
-            // Step 9: Take final screenshot
-            await page.screenshot({path: `./Evidence/screenshots/OTP_Disabled_${data.TestcaseID}.png`});
+    await page.screenshot({path:`./Evidence/screenshots/${data.Username}.png`});
 
-        });
-    }
-});
+    await page.waitForTimeout(2000);
+
+    await page.locator(`#Login`).click();
+
+}) 
+} 
+} ) ;

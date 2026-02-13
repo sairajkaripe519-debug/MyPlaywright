@@ -46,42 +46,36 @@
 
 // import { test } from "@playwright/test";
 
+test(`Learn frames interaction`,async ({page}) => {
+    await page.goto(`https://leafground.com/frame.xhtml`);
+    
+    const FRM_LOC = page.frameLocator(`[src="default.xhtml"]`)
+ 
+    await FRM_LOC.locator("#Click").click(); // Step1 idetify the frame in which that element is present
 
-// test(`Learn frames interaction`,async ({page}) => {
-
-
-
-//     await page.goto(`https://leafground.com/frame.xhtml`);
-
-
-//     const frameRef = page.frameLocator(`[src="default.xhtml"]`) // Step1 idetify the frame in which that element is present
-
-
-//            await frameRef.locator("#Click").click(); // Step2 the control moves into the frame==> page
+    await page.screenshot({path:`/Users/sairajkarpe/Sairaj Education/MyPlaywright/Evidence/frame1.png`}) ;
+   
+    await page.waitForTimeout(3000);
 
 
-//            //mainpage => await page.locator("#Click")
-//            await page.waitForTimeout(3000)
-// })
 
+    // const frameRef = page.frameLocator(`[src="default.xhtml"]`) // Step1 idetify the frame in which that element is present
 
+    //        await frameRef.locator("#Click").click(); // Step2 the control moves into the frame==> page
+
+    //        //mainpage => await page.locator("#Click")
+
+        //    await page.waitForTimeout(3000)
+})
 
 // test (`Learn nested frames interaction`,async ({page}) => {
 
-
-
 //     await page.goto(`https://leafground.com/frame.xhtml`);
-
 
 //     const frameRefOuterFrame = page.frameLocator(`[src="page.xhtml"]`) // Step1 idetify the outer frame in which that element is present
 
-
-
 //      const frameRefInnerrFrame = frameRefOuterFrame.frameLocator(`[id="frame2"]`)
           
-    
-    
-    
 //     await frameRefInnerrFrame.locator("#Click").click(); // Step2 the control moves into the frame==> page
 
 
@@ -89,24 +83,25 @@
 //            await page.waitForTimeout(3000)
 // })
 
-test (`to test logout`, async ({page}) => {
+// test (`to test logout`, async ({page}) => {
 
-    await page.goto (`https://testleaf.my.salesforce.com/`) ;
+//     await page.goto (`https://testleaf.my.salesforce.com/`) ;
 
-    await page.getByAltText("Salesforce").isVisible();
+//     await page.getByAltText("Salesforce").isVisible();
 
-    await page.getByRole("textbox",{name:"Username"}).fill("dilipkumar.rajendran@testleaf.com");
+//     await page.getByRole("textbox",{name:"Username"}).fill("dilipkumar.rajendran@testleaf.com");
 
-    await page.getByRole("textbox",{name:"password"}).fill(`TestLeaf@2025`) ;
+//     await page.getByRole("textbox",{name:"password"}).fill(`TestLeaf@2025`) ;
 
-    await page.getByRole("button",{name:"Log In"}).click();
+//     await page.getByRole("button",{name:"Log In"}).click();
 
-    await page.screenshot(`/Users/sairajkarpe/Sairaj Education/MyPlaywright/Evidence`)
+//     await page.screenshot(`/Users/sairajkarpe/Sairaj Education/MyPlaywright/Evidence`)
 
-    //await page.getByTitle("View profile",{exact:true}).click();
+//     //await page.getByTitle("View profile",{exact:true}).click();
 
-    await page.locator (`//div[@class="profileTrigger branding-user-profile bgimg slds-avatar slds-avatar_profile-image-small circular forceEntityIcon"]`).click();
+//     await page.locator (`//div[@class="profileTrigger branding-user-profile bgimg slds-avatar slds-avatar_profile-image-small circular forceEntityIcon"]`).click();
 
-    await page.locator(`//a[contains(text(),'Log Out')]`).click();
+//     await page.locator(`//a[contains(text(),'Log Out')]`).click();
 
-})
+// })
+

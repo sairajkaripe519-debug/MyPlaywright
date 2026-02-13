@@ -6,7 +6,7 @@ test(`Test to learn CSS Selectors`,async ({page}) => {
 
     const browser = await chromium.launch()
     const context = await browser.newContext()
-    const page = await context.newPage()
+    //const page = await context.newPage()
 
     await page.goto(`http://leaftaps.com/opentaps/control/main`)
 

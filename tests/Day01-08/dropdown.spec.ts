@@ -40,7 +40,7 @@ test(`Test to learn dropdown interaction`,async ({page}) => {
      await page.selectOption(`//select[@id="createLeadForm_dataSourceId"]`,{index:1}) // index
  
     
-    selectOption : part1(argument1) : identify the web element, part2(argument2);
+    // part1(argument1) : identify the web Element, part2(argument2);
     
 
 
